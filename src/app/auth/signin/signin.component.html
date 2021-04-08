@@ -1,0 +1,74 @@
+<div class="container">
+  <h1 class="py-2 text-center">Signin Form</h1>
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <!--
+        - ngForm cung cấp các phương thức quản lý form
+        - Giờ đây ta có thể sử dụng signinForm.value để lấy ra tất cả giá trị của các input bên trong tag form, nhưng input phải thoả mãn 2 đk là phải có property name và ngModel đứng 1 mình
+      -->
+      <form #signinForm="ngForm" (ngSubmit)="handleSignin()">
+        <pre>{{ signinForm.value | json }}</pre>
+
+        <div class="form-group">
+          <label>Tài khoản</label>
+          <input
+            type="text"
+            class="form-control"
+            name="taiKhoan"
+            ngModel
+            required
+            minlength="3"
+            maxlength="20"
+            #taiKhoan="ngModel"
+          />
+          <div
+            *ngIf="taiKhoan.invalid && (taiKhoan.dirty || taiKhoan.touched)"
+            class="alert alert-danger"
+          >
+            <span *ngIf="taiKhoan.errors?.required">
+              Tài khoản không được để trống
+            </span>
+            <span
+              *ngIf="taiKhoan.errors?.minlength || taiKhoan.errors?.maxlength"
+            >
+              Tài khoản phải từ 3 đến 20 kí tự
+            </span>
+          </div>
+          <pre>{{ taiKhoan.errors | json }}</pre>
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu</label>
+          <input
+            type="password"
+            class="form-control"
+            name="matKhau"
+            ngModel
+            required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            #matKhau="ngModel"
+          />
+          <div
+            *ngIf="matKhau.invalid && (matKhau.touched || matKhau.dirty)"
+            class="alert alert-danger"
+          >
+            <span *ngIf="matKhau.errors?.required">
+              Mật khẩu không được để trống
+            </span>
+            <span *ngIf="matKhau.errors?.pattern">
+              Mật khẩu không đúng định dạng
+            </span>
+          </div>
+          <pre>{{ matKhau.errors | json }}</pre>
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger">
+          {{ error }}
+        </div>
+
+        <button class="btn btn-success" [disabled]="isLoading">
+          Đăng Nhập
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

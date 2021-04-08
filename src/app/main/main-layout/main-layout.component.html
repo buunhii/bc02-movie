@@ -1,0 +1,13 @@
+<div class="d-flex bg-secondary justify-content-between px-5 py-2">
+  <div>CyberMovie</div>
+  <div><a href="">Lịch chiếu</a> <a href="">Cụm rạp</a></div>
+  <div>
+    <p *ngIf="currentUser">
+      {{ currentUser.hoTen }}
+    </p>
+    <!-- Hien thi thông tin user khi đã đăng nhập -->
+    <a *ngIf="!currentUser" routerLink="/signin">Đăng Nhập</a>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

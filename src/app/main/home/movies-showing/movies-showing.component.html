@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let movie of movieList" class="col-sm-3">
+      <div class="card">
+        <img class="card-img-top" [src]="movie.hinhAnh" alt="" />
+        <div class="card-body">
+          <h4 class="card-title">{{ movie.tenPhim }}</h4>
+          <p class="card-text">{{ movie.moTa }}</p>
+          <button routerLink="movie/{{ movie.maPhim }}">Mua Vé</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
